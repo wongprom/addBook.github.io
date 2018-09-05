@@ -66,6 +66,8 @@ document.querySelector('#book-form').addEventListener('submit', function(e) {
     //Add book ti list
     ui.addBookTolist(book);
 
+    //Show success
+    ui.showAlert('Book added', 'success');
     //Clear fields
     ui.clearFields();
   }
