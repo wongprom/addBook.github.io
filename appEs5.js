@@ -40,6 +40,14 @@ UI.prototype.showAlert = function(message, className) {
     document.querySelector('.alert').remove();
   }, 3000);
 };
+
+//Delete book
+UI.prototype.deleteBook = function(target) {
+  if (target.className === 'delete') {
+    target.parentElement.parentElement.remove();
+  }
+};
+
 //Clear fields
 UI.prototype.clearFields = function() {
   document.querySelector('#title').value = '';
@@ -47,7 +55,7 @@ UI.prototype.clearFields = function() {
   document.querySelector('#isbn').value = '';
 };
 
-//Event listners
+//Event listner for add book
 document.querySelector('#book-form').addEventListener('submit', function(e) {
   //Get form values
   (title = document.querySelector('#title').value),
@@ -73,5 +81,18 @@ document.querySelector('#book-form').addEventListener('submit', function(e) {
   }
 
   //Prevent window to load
+  e.preventDefault();
+});
+
+//Event listner for delete
+document.querySelector('#book-list').addEventListener('click', function(e) {
+  //Instantiat UI
+  const ui = new UI();
+
+  //Delete book
+  ui.deleteBook(e.target);
+
+  //Show message
+  ui.showAlert('Deleted book', 'success');
   e.preventDefault();
 });
