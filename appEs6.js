@@ -65,18 +65,38 @@ class Store {
     return books;
   }
 
-  static displayBooks() {}
+  static displayBooks() {
+    const books = Store.getBooks();
+
+    books.forEach(function(book) {
+      const ui = new UI();
+
+      //Add book to UI
+      ui.addBookTolist(book);
+    });
+  }
 
   static addBook(book) {
     const books = Store.getBooks();
 
+    /*
+    books.forEach(function(book) {
+      const ui = new UI();
+
+      //Add book to UI
+      ui.addBookTolist(book);
+    });
+*/
     books.push(book);
 
-    localStorage.setItem('book', JSON.stringify(books));
+    localStorage.setItem('books', JSON.stringify(books));
   }
 
   static removeBook() {}
 }
+
+//DOM load event
+document.addEventListener('DOMContentLoaded', Store.displayBooks);
 
 //Event listner for add book
 document.querySelector('#book-form').addEventListener('submit', function(e) {
